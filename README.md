@@ -1,4 +1,4 @@
-# Domain DNS 
+# Domain DNS Information
 Get Information of domain name - Details + DNS Resolve + Subdomains + SSL
 
 Install Modules 
