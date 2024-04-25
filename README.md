@@ -1,5 +1,5 @@
-# IP-Info
-Get Information - DNS Resolve + Sockets + SSL
+# Domain DNS 
+Get Information of domain name - Details + DNS Resolve + Subdomains + SSL
 
 Install Modules 
 * pip install python-whois
