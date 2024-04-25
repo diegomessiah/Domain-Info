@@ -49,6 +49,22 @@ def get_ssl_certificate(domain):
         print("[-] Error al obtener el certificado SSL:", e)
         return None
 
+def check_open_ports(ip_address):
+    open_ports = []
+    common_ports = [21, 22, 23, 25, 53, 80, 443, 3306, 3389, 8080]  # Puertos comunes a verificar
+
+    for port in common_ports:
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1)  # Configura el tiempo de espera de conexión a 1 segundo
+                result = s.connect_ex((ip_address, port))
+                if result == 0:
+                    open_ports.append(port)
+        except Exception as e:
+            print(f"[-] Error al verificar puerto {port}: {e}")
+
+    return open_ports
+
 def main():
     domain = input("Introduce el nombre de dominio a consultar: ")
 
@@ -73,7 +89,18 @@ def main():
     if subdomains:
         print("[+] Subdominios:")
         for subdomain in subdomains:
-            print("    -", subdomain)
+            print("    -", subdomain + '.' + domain)  # Incluimos el dominio principal al imprimir el subdominio
+            subdomain_ips = get_dns_records(subdomain + '.' + domain)
+            if subdomain_ips:
+                for subdomain_ip in subdomain_ips:
+                    open_ports = check_open_ports(subdomain_ip)
+                    if open_ports:
+                        print("        [+] Puertos abiertos en", subdomain_ip)
+                        print("            -", open_ports)
+                    else:
+                        print("        [-] No se encontraron puertos abiertos en", subdomain_ip)
+            else:
+                print("        [-] No se encontraron registros DNS para el subdominio")
 
     # Obtener certificado SSL
     print("[*] Obtener información del certificado SSL...")
