@@ -1,10 +1,50 @@
-# Domain DNS Information
-Get Information of domain name - Details + DNS Resolve + Subdomains + Common Ports Open SSL
+# Domain Info
 
-Install Modules 
-* pip install python-whois
-* pip install dnspython
-* pip install requests
+A lightweight Python tool to extract key information about internet domains. Ideal for security analysts, system administrators, or anyone needing to gather DNS, IP, and SSL details quickly.
 
-![image](https://github.com/diegomessiah/Domain-Info/assets/45059187/20cc0a66-3fad-49a6-a897-b2b1710e40b1)
+## 🔍 Features
 
+- Retrieves DNS and IP resolution
+- Gathers SSL certificate details
+- Performs WHOIS and basic network lookups
+- Outputs clear and human-readable results
+
+## 📦 Requirements
+
+- Python 3.6+
+- Modules:
+  - `socket`
+  - `ssl`
+  - `requests`
+  - `whois` *(optional)*
+
+Install optional packages:
+
+```bash
+pip install requests python-whois
+```
+## 🚀 Usage
+
+```bash
+python domain_info.py example.com
+```
+Output will include:
+  - Domain IP and DNS resolution
+  - SSL certificate subject/issuer
+  - Expiry date
+  - WHOIS info (if available)
+
+## 📁 Example Output
+See the examples/ folder for sample output.
+
+## 🛡️ Use Cases
+- Blue Team analysis
+- Security audits
+- Educational purposes
+- General domain investigation
+
+## 📄 License
+This project is licensed under the MIT License.
+
+## 🙋‍♂️ Author
+Diego Messiah
